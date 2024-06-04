@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-    "workbench.iconTheme": "material-icon-theme"
-=======
-  "workbench.iconTheme": "material-icon-theme",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
@@ -60,10 +56,9 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "workbench.iconTheme": "material-icon-theme",
   "files.associations": {
     "*.embeddedhtml": "html",
-    "ostream": "cpp",
-    "iostream": "cpp"
+    "ostream": "cpp"
   }
->>>>>>> d327460 (first commit)
 }

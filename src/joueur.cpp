@@ -21,7 +21,7 @@ int Joueur::get_mise_depart() const
 
 void Joueur::set_mise_depart(int rajout)
 {
-    mise_depart += rajout*1.5;
+    mise_depart += rajout * 1.5;
 }
 
 void Joueur::set_mise_departJeu(int perte)
@@ -114,4 +114,15 @@ void Joueur::vider_main()
     scores[0] = 0;
     scores[1] = 0;
     main_index = 0;
+}
+
+Joueur Joueur::split()
+{
+    Joueur new_joueur;
+    new_joueur.ajouter_carte(mains[0].back(), 0);
+    mains[0].pop_back();
+    scores[0] = mains[0][0].get_valeur(); // Met à jour le score après le split
+    new_joueur.set_mise(mise);            // Le nouveau joueur a la même mise de départ
+
+    return new_joueur;
 }

@@ -34,6 +34,7 @@ public:
     void set_mise_depart(int rajout);
     void set_mise_departJeu(int perte);
     void vider_main();
+    Joueur split();
 };
 
 #endif

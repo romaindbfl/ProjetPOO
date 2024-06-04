@@ -12,6 +12,6 @@ using namespace std;
 
 int main()
 {
-    deroulement_partie();
+    initialisation();
     return 0;
 }

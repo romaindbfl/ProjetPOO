@@ -93,12 +93,26 @@ void deroulement_partie()
                 cout << "Vous avez decide de doubler votre mise" << endl;
                 joueur.set_mise(joueur.get_mise() * 2);
                 cout << "Votre mise est maintenant de " << joueur.get_mise() << endl;
+                groupier.distribuer_cartes(joueur, 1);
+                cout << endl
+                     << "Nouvelle main du joueur : " << endl;
+                joueur.afficher_main();
+                cout << "Nouveau score du joueur : " << joueur.get_score() << endl;
+                // Si le joueur bust (score superieur à 21), le jeu doit se terminer
+                if (joueur.get_score() > 21)
+                {
+                    cout << "Le joueur a depasse 21. Le joueur perd." << endl;
+                    joueur.set_mise_departJeu(joueur.get_mise());
+                    cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
+                    cout << "Voulez-vous rejouer? (O/N)" << endl;
+                    cin >> rejouer;
+                    continue;
+                }
                 break;
             case 4:
                 system("cls");
                 if (joueur.peut_split())
                 {
-                    joueur.split();
                     cout << "Vous avez split votre main." << endl;
                 }
                 else
@@ -126,7 +140,7 @@ void deroulement_partie()
                 cout << "Choix invalide. Veuillez choisir une option valide." << endl;
                 continue;
             }
-            if (choix == 2)
+            if (choix == 2 || choix == 3 || choix == 4)
             {
                 break;
             }
@@ -162,7 +176,7 @@ void deroulement_partie()
         }
 
         // Comparaison des scores pour determiner le gagnant
-        if (joueur.get_score() > groupier.get_score() && joueur.get_score() <= 21)
+        if (joueur.get_score() > groupier.get_score())
         {
             cout << endl;
             cout << "Score du joueur : " << joueur.get_score() << endl;
@@ -170,7 +184,7 @@ void deroulement_partie()
             joueur.set_mise_depart(joueur.get_mise());
             cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
         }
-        else if (groupier.get_score() <= 21 && groupier.get_score() >= joueur.get_score())
+        else if (groupier.get_score() > joueur.get_score())
         {
             cout << endl;
             cout << "Score du joueur : " << joueur.get_score() << endl;
@@ -190,4 +204,8 @@ void deroulement_partie()
         cout << "Voulez-vous rejouer? (O/N)" << endl;
         cin >> rejouer;
     }
+}
+
+void deroulement_split()
+{
 }

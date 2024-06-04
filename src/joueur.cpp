@@ -85,16 +85,6 @@ bool Joueur::peut_split() const
     return mains[0].size() == 2 && mains[0][0].get_valeur() == mains[0][1].get_valeur();
 }
 
-void Joueur::split()
-{
-    if (!peut_split())
-        return;
-    mains[1].push_back(mains[0].back());
-    mains[0].pop_back();
-    scores[1] = mains[1].front().get_valeur();
-    scores[0] = mains[0].front().get_valeur();
-}
-
 void Joueur::set_main_index(int index)
 {
     main_index = index;

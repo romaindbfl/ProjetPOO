@@ -26,7 +26,6 @@ public:
     char get_nom() const;
     void afficher_main_groupier() const;
     bool peut_split() const;
-    void split();
     void set_main_index(int index);
     int get_main_index() const;
     int get_mise() const;

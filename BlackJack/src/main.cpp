@@ -7,6 +7,7 @@
 #include "header/jeu.hpp"
 #include "header/joueur.hpp"
 #include "header/groupier.hpp"
+#include "header/regle.hpp"
 
 using namespace std;
 

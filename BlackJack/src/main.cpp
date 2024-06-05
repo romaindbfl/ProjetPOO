@@ -13,6 +13,7 @@ using namespace std;
 
 int main()
 {
-    initialisation();
+    Jeu jeu;
+    jeu.initialisation();
     return 0;
 }

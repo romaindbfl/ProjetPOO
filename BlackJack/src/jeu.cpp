@@ -1,6 +1,6 @@
 #include "header/jeu.hpp"
 
-void initialisation()
+void Jeu::initialisation()
 { // Creation du joueur et du groupier
     system("cls");
     cout << "Bienvenue dans le jeu de Blackjack!" << endl;
@@ -10,7 +10,7 @@ void initialisation()
     deroulement_partie(joueur, groupier);
 }
 
-void deroulement_partie(Joueur &joueur, Groupier &groupier)
+void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
 {
     Regle regle;
     int choix;
@@ -61,7 +61,8 @@ void deroulement_partie(Joueur &joueur, Groupier &groupier)
                 cout << endl
                      << "Nouvelle main du joueur : " << endl;
                 joueur.afficher_main();
-                cout << "Nouveau score du joueur : " << joueur.get_score() << endl;
+                cout << "Nouveau score du joueur : " << joueur.get_score() << endl
+                     << endl;
                 regle.joueur_bust(joueur, groupier);
                 break;
             case 2:
@@ -120,7 +121,6 @@ void deroulement_partie(Joueur &joueur, Groupier &groupier)
             {
                 break;
             }
-            system("cls");
         }
 
         cout << endl;
@@ -132,7 +132,7 @@ void deroulement_partie(Joueur &joueur, Groupier &groupier)
     }
 }
 
-void deroulement_split(Joueur &joueur, Joueur &joueur_split, Groupier &groupier)
+void Jeu::deroulement_split(Joueur &joueur, Joueur &joueur_split, Groupier &groupier)
 {
     Regle regle;
 
@@ -171,18 +171,18 @@ void deroulement_split(Joueur &joueur, Joueur &joueur_split, Groupier &groupier)
             {
                 system("cls");
                 groupier.distribuer_cartes(joueur, 1);
-                cout << "Nouvelle main du joueur : " << endl;
+                cout << "Nouvelle main 1 : " << endl;
                 joueur.afficher_main();
-                cout << "Score du joueur : " << joueur.get_score() << endl
+                cout << "Score de la main 1 : " << joueur.get_score() << endl
                      << endl;
             }
             else if (choix_split == 2)
             {
                 system("cls");
                 groupier.distribuer_cartes(joueur_split, 1);
-                cout << "Nouvelle main du joueur : " << endl;
+                cout << "Nouvelle main 2 : " << endl;
                 joueur_split.afficher_main();
-                cout << "Score du joueur : " << joueur_split.get_score() << endl
+                cout << "Score de la main 2 : " << joueur_split.get_score() << endl
                      << endl;
             }
             break;
@@ -217,9 +217,9 @@ void deroulement_split(Joueur &joueur, Joueur &joueur_split, Groupier &groupier)
         {
             break;
         }
-        system("cls");
     }
 
+    system("cls");
     // Tour du groupier
     regle.tour_groupier(groupier, joueur);
 

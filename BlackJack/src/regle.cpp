@@ -10,7 +10,7 @@ void Regle::misevalable(Joueur &joueur)
         exit(0);
     }
     else
-    { // Affichage des gains de départ
+    { // Affichage des gains de depart
         cout << "Vos gains de depart sont de " << joueur.get_mise_depart() << " euros.\n"
              << endl;
 
@@ -35,7 +35,7 @@ void Regle::joueur_bust(Joueur &joueur, Groupier &groupier)
 {
     if (joueur.get_score() > 21)
     {
-        cout << "Le joueur a depasse 21. Le joueur perd." << endl;
+        cout << "Vous avez depasse 21. Vous avez perdu." << endl;
         joueur.set_mise_departJeu(joueur.get_mise());
         cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
         rejouer(joueur, groupier);
@@ -44,12 +44,14 @@ void Regle::joueur_bust(Joueur &joueur, Groupier &groupier)
 
 void Regle::rejouer(Joueur &joueur, Groupier &groupier)
 {
+    Jeu jeu;
     cout << "Voulez-vous rejouer? (O/N)" << endl;
     char rejouer;
     cin >> rejouer;
     if (rejouer == 'o' || rejouer == 'O')
     {
-        deroulement_partie(joueur, groupier);
+        system("cls");
+        jeu.deroulement_partie(joueur, groupier);
     }
     else
     {
@@ -83,7 +85,7 @@ void Regle::groupier_bust(Groupier &groupier, Joueur &joueur)
     // Si le groupier bust (score superieur à 21), le jeu doit se terminer
     if (groupier.get_score() > 21)
     {
-        cout << "Le groupier a depasse 21. Le joueur gagne." << endl;
+        cout << "Le groupier a depasse 21. Vous avez gagne." << endl;
         joueur.set_mise_depart(joueur.get_mise());
         cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
         rejouer(joueur, groupier);
@@ -95,15 +97,15 @@ void Regle::Gagnant(Joueur &joueur, Groupier &groupier)
     if (joueur.get_score() > groupier.get_score())
     {
         cout << endl;
-        cout << "Score du joueur : " << joueur.get_score() << endl;
-        cout << "Le joueur gagne." << endl;
+        cout << "Votre score : " << joueur.get_score() << endl;
+        cout << "Vous avez gagne." << endl;
         joueur.set_mise_depart(joueur.get_mise());
         cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
     }
     else if (groupier.get_score() > joueur.get_score())
     {
         cout << endl;
-        cout << "Score du joueur : " << joueur.get_score() << endl;
+        cout << "Votre score : " << joueur.get_score() << endl;
         cout << "Le groupier gagne." << endl;
         joueur.set_mise_departJeu(joueur.get_mise());
         cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
@@ -111,7 +113,7 @@ void Regle::Gagnant(Joueur &joueur, Groupier &groupier)
     else if (groupier.get_score() == joueur.get_score())
     {
         cout << endl;
-        cout << "Score du joueur : " << joueur.get_score() << endl;
+        cout << "Votre score : " << joueur.get_score() << endl;
         cout << "C'est une egalite." << endl;
         cout << "Vos gains restent inchange." << endl;
     }
@@ -123,7 +125,7 @@ void Regle::main1gagnant(Joueur &joueur, Groupier &groupier)
 {
     if (joueur.get_score() > groupier.get_score())
     {
-        cout << "Votre main 1 a gagné." << endl;
+        cout << "Votre main 1 a gagne." << endl;
         joueur.set_mise_depart(joueur.get_mise());
     }
     else if (groupier.get_score() > joueur.get_score())
@@ -133,7 +135,7 @@ void Regle::main1gagnant(Joueur &joueur, Groupier &groupier)
     }
     else
     {
-        cout << "C'est une égalité avec votre main 1." << endl;
+        cout << "C'est une egalite avec votre main 1." << endl;
     }
 }
 
@@ -142,7 +144,7 @@ void Regle::main2gagnant(Joueur &joueur_split, Groupier &groupier, Joueur &joueu
 
     if (joueur_split.get_score() > groupier.get_score())
     {
-        cout << "Votre main 2 a gagné." << endl;
+        cout << "Votre main 2 a gagne." << endl;
         joueur.set_mise_depart(joueur_split.get_mise());
     }
     else if (groupier.get_score() > joueur_split.get_score())
@@ -152,6 +154,6 @@ void Regle::main2gagnant(Joueur &joueur_split, Groupier &groupier, Joueur &joueu
     }
     else
     {
-        cout << "C'est une égalité avec votre main 2." << endl;
+        cout << "C'est une egalite avec votre main 2." << endl;
     }
 }

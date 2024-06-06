@@ -5,6 +5,9 @@
 #include <iostream>
 #include "Chiffrement.hpp"
 
+// Classe de l'interface homme machine, possède un large éventail de méthodes qui permette un affichage 
+// agréable pour l'utilisateur qui n'a qu'à faire le choix de ce qu'il veut faire
+
 class InterfaceUtilisateur {
 public:
     static void demarrer();

@@ -1,12 +1,17 @@
+// Inclusion des fichiers d'en-tête nécessaires
 #include "header/UI.hpp"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 #include <limits>
 
+// Implémentation des méthodes de la classe InterfaceUtilisateur
+
+// Méthode pour démarrer l'interface utilisateur
 void InterfaceUtilisateur::demarrer() {
+    // Affichage du message de bienvenue et des options disponibles
     cout << "Bienvenue dans l'application de chiffrement et de déchiffrement de messages !" << endl;
-    cout << "1. Chiffrement César\n2. Chiffrement par Substitution\n3. Déchiffrement César\n4. Déchiffrement par Substitution\n5. Chiffrer à partir d'un fichier\n6. Quitter" << endl;
+    cout << "1. Chiffrement Cesar\n2. Chiffrement par Substitution\n3. Dechiffrement Cesar\n4. Dechiffrement par Substitution\n5. Chiffrer a partir d'un fichier\n6. Quitter" << endl;
 
     int choix;
     cout << "Choisissez une option : ";
@@ -20,6 +25,8 @@ void InterfaceUtilisateur::demarrer() {
     }
 
     InterfaceUtilisateur interface; // Création d'un objet InterfaceUtilisateur
+    
+    // Sélection de l'action en fonction de l'option choisie
     switch (choix) {
         case 1:
             interface.demonstrationChiffrementCesar();
@@ -44,10 +51,13 @@ void InterfaceUtilisateur::demarrer() {
             exit(1);
     }
 }
+
+// Méthode pour démontrer le chiffrement César
 void InterfaceUtilisateur::demonstrationChiffrementCesar() {
     int decalage;
     cout << "Entrez le décalage pour le chiffrement de César : ";
     cin >> decalage;
+    // Gestion des entrées non numériques
     while (cin.fail()) {
         cerr << "Entrée invalide ! Veuillez entrer un nombre entier." << endl;
         cin.clear();
@@ -61,10 +71,12 @@ void InterfaceUtilisateur::demonstrationChiffrementCesar() {
     cin.ignore();
     getline(cin, message);
 
+    // Création de l'objet ChiffrementCesar et chiffrement du message
     ChiffrementCesar chiffrement(decalage);
     string texteChiffre = chiffrement.chiffrer(message);
     cout << "Message chiffré : " << texteChiffre << endl;
 
+    // Enregistrement du message chiffré dans un fichier si désiré
     string nomFichier;
     cout << "Voulez-vous enregistrer le message chiffré dans un fichier ? (Oui/Non) : ";
     cin >> nomFichier;
@@ -78,6 +90,7 @@ void InterfaceUtilisateur::demonstrationChiffrementCesar() {
     }
 }
 
+// Méthode pour démontrer le chiffrement par substitution
 void InterfaceUtilisateur::demonstrationChiffrementSubstitution() {
     string cle;
     cout << "Entrez la clé de chiffrement par substitution : ";
@@ -111,6 +124,7 @@ void InterfaceUtilisateur::demonstrationChiffrementSubstitution() {
     }
 }
 
+// Méthode pour démontrer le déchiffrement César
 void InterfaceUtilisateur::demonstrationDechiffrementCesar() {
     int decalage;
     cout << "Entrez le décalage utilisé pour le chiffrement de César : ";
@@ -126,6 +140,7 @@ void InterfaceUtilisateur::demonstrationDechiffrementCesar() {
     cout << "Message déchiffré : " << texteDechiffre << endl;
 }
 
+// Méthode pour démontrer le déchiffrement par substitution
 void InterfaceUtilisateur::demonstrationDechiffrementSubstitution() {
     string cle;
     cout << "Entrez la clé de chiffrement par substitution utilisée : ";
@@ -141,6 +156,7 @@ void InterfaceUtilisateur::demonstrationDechiffrementSubstitution() {
     cout << "Message déchiffré : " << texteDechiffre << endl;
 }
 
+// Méthode pour lire le contenu d'un fichier
 string InterfaceUtilisateur::lireFichier(const string& nomFichier) {
     ifstream fichier(nomFichier);
     if (!fichier) {
@@ -152,6 +168,7 @@ string InterfaceUtilisateur::lireFichier(const string& nomFichier) {
     return contenu;
 }
 
+// Méthode pour chiffrer le contenu d'un fichier
 void InterfaceUtilisateur::chiffrerFichier() {
     string nomFichierEntree;
     cout << "Entrez le nom et chemin du fichier contenant le texte à chiffrer : ";
@@ -218,6 +235,7 @@ void InterfaceUtilisateur::chiffrerFichier() {
     cout << "Message chiffré enregistré dans le fichier " << nomFichierSortie << endl;
 }
 
+// Méthode pour écrire du contenu dans un fichier
 void InterfaceUtilisateur::ecrireFichier(const string& nomFichier, const string& contenu) {
     ofstream fichier(nomFichier);
     if (!fichier) {

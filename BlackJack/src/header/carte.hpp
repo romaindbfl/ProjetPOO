@@ -4,18 +4,19 @@
 #include <iostream>
 using namespace std;
 
+// Classe permettant de definir le symbole et la valeur d'une carte
 class Carte
 {
 protected:
-    int valeur;
-    char symbole;
+    int valeur;   // Valeur de la carte (1,2,3 etc...)
+    char symbole; // Symbole de la carte (A,2,3 etc...)
 
 public:
     Carte(int valeur, char symbole);
-    int get_valeur() const;
-    char get_symbole() const;
-    int set_valeur(int valeur);
-    void afficher() const;
+    int get_valeur() const;     // Retourne la valeur de la carte
+    char get_symbole() const;   // Retourne le symbole de la carte
+    int set_valeur(int valeur); // Modifie la valeur de la carte
+    void afficher() const;      // Affiche la carte
 };
 
 class As : public Carte

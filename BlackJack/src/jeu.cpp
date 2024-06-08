@@ -6,8 +6,7 @@ void Jeu::initialisation()
     cout << "Bienvenue dans le jeu de Blackjack!" << endl;
     Joueur joueur;
     Groupier groupier;
-
-    deroulement_partie(joueur, groupier);
+    deroulement_partie(joueur, groupier); // Lancement du deroulement de la partie
 }
 
 void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
@@ -17,8 +16,7 @@ void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
 
     while (true)
     {
-
-        regle.misevalable(joueur);
+        regle.misevalable(joueur); // Demande de la mise du joueur
 
         // Réinitialisation des mains du joueur et du groupier
         joueur.vider_main();
@@ -36,7 +34,7 @@ void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
         cout << "Score du joueur : " << joueur.get_score() << "\n"
              << endl;
 
-        // Affichage des cartes du groupier
+        // Affichage d'un carte du groupier
         cout << "Main du groupier : " << endl;
         groupier.afficher_main_groupier();
         cout << endl;
@@ -63,7 +61,7 @@ void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
                 joueur.afficher_main();
                 cout << "Nouveau score du joueur : " << joueur.get_score() << endl
                      << endl;
-                regle.joueur_bust(joueur, groupier);
+                regle.joueur_bust(joueur, groupier); // On verifie si le joueur a bust
                 break;
             case 2:
                 system("cls");
@@ -72,23 +70,22 @@ void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
             case 3:
                 system("cls");
                 cout << "Vous avez decide de doubler votre mise" << endl;
-                joueur.set_mise(joueur.get_mise() * 2);
+                joueur.set_mise(joueur.get_mise() * 2); // On double la mise
                 cout << "Votre mise est maintenant de " << joueur.get_mise() << endl;
-                groupier.distribuer_cartes(joueur, 1);
+                groupier.distribuer_cartes(joueur, 1); // Et on distribue 1 carte au joueur puis on fini son tour
                 cout << endl
                      << "Nouvelle main du joueur : " << endl;
                 joueur.afficher_main();
                 cout << "Nouveau score du joueur : " << joueur.get_score() << endl;
-                // Si le joueur bust (score superieur à 21), le jeu doit se termine
                 regle.joueur_bust(joueur, groupier);
                 break;
             case 4:
                 system("cls");
-                if (joueur.peut_split())
+                if (joueur.peut_split()) // On verifie si le joueur peut split
                 {
                     cout << "Vous avez split votre main." << endl;
-                    Joueur new_joueur = joueur.split();
-                    deroulement_split(joueur, new_joueur, groupier);
+                    Joueur new_joueur = joueur.split();              // On split la main du joueur en creant un nouveau joueur avec comme valeur une carte de la meme valeur que la main de départ et la meme mise
+                    deroulement_split(joueur, new_joueur, groupier); // On lance le deroulement du jeu avec comme regle que le joueur a split sa main
                 }
                 else
                 {
@@ -97,7 +94,7 @@ void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
                 }
                 break;
             case 5:
-                // Affichage des cartes du joueur
+                // Affichage des informations du joueur et d'une carte du groupier
                 system("cls");
                 cout
                     << "Main du joueur : " << endl;
@@ -117,6 +114,7 @@ void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
                 continue;
             }
 
+            // Si le choix fais est 2, 3 ou 4 alors on fini le tour du joueur et on sort du switch
             if (choix == 2 || choix == 3 || choix == 4)
             {
                 break;
@@ -132,6 +130,7 @@ void Jeu::deroulement_partie(Joueur &joueur, Groupier &groupier)
     }
 }
 
+// Deroulement d'une partie si le joueur a split sa main
 void Jeu::deroulement_split(Joueur &joueur, Joueur &joueur_split, Groupier &groupier)
 {
     Regle regle;
@@ -167,6 +166,7 @@ void Jeu::deroulement_split(Joueur &joueur, Joueur &joueur_split, Groupier &grou
             cout << "Voulez-vous tirer une carte sur votre premiere ou deuxieme main ? (1/2)" << endl;
             int choix_split;
             cin >> choix_split;
+            // Dans le cas ou le joueur a split sa main alors il peut tirer une carte sur sa main 1 ou 2
             if (choix_split == 1)
             {
                 system("cls");
@@ -228,5 +228,5 @@ void Jeu::deroulement_split(Joueur &joueur, Joueur &joueur_split, Groupier &grou
     regle.main2gagnant(joueur_split, groupier, joueur);
 
     cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
-    regle.rejouer(joueur, groupier);
+    regle.rejouer(joueur, groupier); // Propose au joueur de rejouer ou non
 }

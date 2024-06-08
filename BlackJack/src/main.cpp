@@ -14,6 +14,6 @@ using namespace std;
 int main()
 {
     Jeu jeu;
-    jeu.initialisation();
+    jeu.initialisation(); // Lance l'initialisation du jeu
     return 0;
 }

@@ -3,7 +3,7 @@
 void Regle::misevalable(Joueur &joueur)
 {
     int mise;
-    if (joueur.get_mise_depart() == 0)
+    if (joueur.get_mise_depart() == 0) // Si la mise de depart est nulle, alors le joueur n'a plus d'argent a miser et la partie s'arrete
     {
         system("cls");
         cout << "Vous n'avez plus d'argent a miser." << endl;
@@ -31,7 +31,7 @@ void Regle::misevalable(Joueur &joueur)
     }
 }
 
-void Regle::joueur_bust(Joueur &joueur, Groupier &groupier)
+void Regle::joueur_bust(Joueur &joueur, Groupier &groupier) // Si le score du joueur depasse 21, alors il perd et la partie s'arrete
 {
     if (joueur.get_score() > 21)
     {
@@ -42,7 +42,7 @@ void Regle::joueur_bust(Joueur &joueur, Groupier &groupier)
     }
 }
 
-void Regle::rejouer(Joueur &joueur, Groupier &groupier)
+void Regle::rejouer(Joueur &joueur, Groupier &groupier) // Methode permettant de gerer le cas ou le joueur veut rejouer ou non
 {
     Jeu jeu;
     cout << "Voulez-vous rejouer? (O/N)" << endl;
@@ -59,9 +59,9 @@ void Regle::rejouer(Joueur &joueur, Groupier &groupier)
     }
 }
 
-void Regle::tour_groupier(Groupier &groupier, Joueur &joueur)
+void Regle::tour_groupier(Groupier &groupier, Joueur &joueur) // Le tour du groupier
 {
-    while (true)
+    while (true) // Tant que le score du groupier est inferieur ou egal à 16, le groupier tire
     {
         if (groupier.get_score() >= 17)
         {
@@ -76,13 +76,12 @@ void Regle::tour_groupier(Groupier &groupier, Joueur &joueur)
             cout << "Score du groupier : " << groupier.get_score() << "\n"
                  << endl;
         }
-        groupier_bust(groupier, joueur);
+        groupier_bust(groupier, joueur); // On verifie si le groupier a bust
     }
 }
 
-void Regle::groupier_bust(Groupier &groupier, Joueur &joueur)
+void Regle::groupier_bust(Groupier &groupier, Joueur &joueur) // Si le groupier a bust (score superieur à 21), le jeu doit se terminer
 {
-    // Si le groupier bust (score superieur à 21), le jeu doit se terminer
     if (groupier.get_score() > 21)
     {
         cout << "Le groupier a depasse 21. Vous avez gagne." << endl;
@@ -94,26 +93,26 @@ void Regle::groupier_bust(Groupier &groupier, Joueur &joueur)
 
 void Regle::Gagnant(Joueur &joueur, Groupier &groupier)
 {
-    if (joueur.get_score() > groupier.get_score())
+    if (joueur.get_score() > groupier.get_score()) // Si le score du joueur est superieur au score du groupier, alors le joueur gagne
     {
         cout << endl;
         cout << "Votre score : " << joueur.get_score() << endl;
         cout << "Vous avez gagne." << endl;
-        joueur.set_mise_depart(joueur.get_mise());
+        joueur.set_mise_depart(joueur.get_mise()); // On ajoute la mise du joueur au gains du joueur
         cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
     }
-    else if (groupier.get_score() > joueur.get_score())
+    else if (groupier.get_score() > joueur.get_score()) // Si le score du groupier est superieur au score du joueur, alors le groupier gagne
     {
         cout << endl;
         cout << "Votre score : " << joueur.get_score() << endl;
         cout << "Le groupier gagne." << endl;
-        joueur.set_mise_departJeu(joueur.get_mise());
+        joueur.set_mise_departJeu(joueur.get_mise()); // On retire la mise du joueur au gains du joueur
         cout << "Vos gains sont maintenant de " << joueur.get_mise_depart() << endl;
     }
-    else if (groupier.get_score() == joueur.get_score())
+    else if (groupier.get_score() == joueur.get_score()) // Si le score du groupier est egal au score du joueur, alors il n'y a pas de gagnant
     {
         cout << endl;
-        cout << "Votre score : " << joueur.get_score() << endl;
+        cout << "Votre score : " << joueur.get_score() << endl; // On ne touche pas au gain du joueur
         cout << "C'est une egalite." << endl;
         cout << "Vos gains restent inchange." << endl;
     }

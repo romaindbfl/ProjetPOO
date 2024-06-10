@@ -2,39 +2,36 @@
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
 
-// Constructeur par defaut
 Groupier::Groupier() : Joueur()
 {
-    this->nom = 'G'; // Par exemple, pour le groupier
-    srand(time(0));  // Initialisation du generateur de nombres aleatoires
+    this->nom = 'G';
+    srand(time(0));
 }
 
 void Groupier::distribuer_cartes(Joueur &joueur, int nombre_de_cartes)
 {
     for (int i = 0; i < nombre_de_cartes; ++i)
     {
-        // Exemple simple : distribuer une carte aleatoire au joueur
-        int choix = rand() % 13 + 1;
+        int choix = rand() % 13 + 1; // Choisi aleatoirement un nombre entre 1 et 13
         char symbole;
 
-        switch (choix)
+        switch (choix) // En fonction du choix, on utilise le symbole correspondant
         {
         case 1:
             symbole = 'A';
             if (joueur.get_score() + 11 <= 21)
             {
                 choix = 11;
-
             }
             else
             {
                 choix = 1;
             }
             break;
-        case 10: // Si le choix est 10, utiliser le symbole 'X' pour le 10
+        case 10:
             symbole = 'X';
             break;
-        case 11:
+        case 11: // Pour les choix suivants la valeur restera 10
             symbole = 'V';
             choix = 10;
             break;
@@ -47,11 +44,11 @@ void Groupier::distribuer_cartes(Joueur &joueur, int nombre_de_cartes)
             choix = 10;
             break;
         default:
-            symbole = '0' + choix; // pour les cartes de 2 à 9
+            symbole = '0' + choix;
         }
 
-        Carte nouvelle_carte(choix, symbole);
-        joueur.ajouter_carte(nouvelle_carte);
+        Carte nouvelle_carte(choix, symbole); // On genere la carte correspondante
+        joueur.ajouter_carte(nouvelle_carte); // On l'ajoute au joueur
 
         // Afficher le message si c'est le joueur qui tire la carte
         if (joueur.get_nom() != 'G')
